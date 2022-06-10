@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Login', () => {
-    it.only('Login válido', () => {
+    it('Login válido', () => {
         cy.login()
 
         cy.get('#logout-link').should('exist')
@@ -15,17 +15,17 @@ describe('Login', () => {
 
         cy.get('#blip-login').click()
 
-        cy.get('#[class="toast"]').should('have.text', 'Login e/ou senha inválidos')
+        cy.get('[icon="error"]').should('be.visible')
     })
 
-    it('Email inválida', () => {
+    it('Email inválido', () => {
         cy.visit('login')
 
-        cy.get('#email').type('email.com.br')
+        cy.get('#email').type('email@email.com.br')
         cy.get('#password').type('Qwe12345*')
 
         cy.get('#blip-login').click()
 
-        cy.get('#[class="toast"]').should('have.text', 'Login e/ou senha inválidos')
+        cy.get('[icon="error"]').should('be.visible')
     })
 })
